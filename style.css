@@ -10,7 +10,7 @@ body {
     color: #3b2f2f;
 }
 
-/* Glow background */
+/* Background glow */
 .background {
     position: absolute;
     width: 100%;
@@ -47,13 +47,13 @@ body {
     100% { transform: translateY(-10vh); opacity: 0; }
 }
 
-/* Container */
+/* Main container */
 .container {
     position: relative;
     z-index: 2;
     max-width: 680px;
     padding: 50px;
-    background: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.9);
     border-radius: 25px;
     text-align: center;
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
@@ -92,7 +92,22 @@ button:hover {
     font-weight: bold;
 }
 
-/* Sunset */
+/* Photo reveal */
+.hidden-photo {
+    display: none;
+    width: 220px;
+    border-radius: 20px;
+    margin: 20px auto;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    animation: fadeInPhoto 1s ease forwards;
+}
+
+@keyframes fadeInPhoto {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Sunset animation */
 .sunset-sun {
     position: absolute;
     bottom: -150px;
@@ -109,7 +124,7 @@ button:hover {
     to { bottom: 200px; }
 }
 
-/* Car */
+/* Car animation */
 .car {
     position: absolute;
     bottom: 80px;
@@ -122,7 +137,7 @@ button:hover {
     to { left: 110vw; }
 }
 
-/* Flashback */
+/* Flashback glow */
 .flashback {
     position: absolute;
     width: 100%;
