@@ -1,11 +1,12 @@
 let step = 0;
-let secretClicks = 0;
 let chosenDate = "";
+let secretClicks = 0;
 
 const text = document.getElementById("text");
 const btn = document.getElementById("btn");
 const music = document.getElementById("music");
 const sceneEffect = document.getElementById("sceneEffect");
+const photo = document.getElementById("herPhoto");
 
 /* Floating hearts */
 setInterval(() => {
@@ -31,11 +32,13 @@ function fade(content) {
 }
 
 function nextStep() {
+
     vibrate();
     if (step === 0) music.play();
     step++;
 
     if (step === 1) {
+        photo.style.display = "block";
         fade(`It’s you.<br><br>Obviously.`);
         btn.innerText = "Wait… what?";
     }
@@ -45,34 +48,29 @@ function nextStep() {
             I was thinking…<br><br>
             How can someone as cute as you,<br>
             someone as ridiculously awesome as you,<br>
-            just stay inside?
+            stay inside on a day like that?
         `);
         btn.innerText = "Go on…";
     }
 
     else if (step === 3) {
-        fade(`As a special friend,<br><br>it didn’t sit right with me.`);
-        btn.innerText = "So?";
+        fade(`
+            So maybe we save the date.<br><br>
+            Not calling it a date.<br>
+            Unless… you want to.
+        `);
+        btn.innerText = "Oh really?";
     }
 
     else if (step === 4) {
-        fade(`
-            So maybe…<br><br>
-            we step outside.<br>
-            Nothing dramatic.<br>
-            Just two special friends.
-        `);
-        btn.innerText = "When exactly?";
-    }
-
-    else if (step === 5) {
         showDateOptions();
     }
 }
 
 function showDateOptions() {
     text.innerHTML = `
-        When should this mysterious outing happen?
+        So… hypothetically speaking 😌<br><br>
+        When would you be free?
         <div class="options">
             <button onclick="selectDate('14th February')">🌹 14th February</button>
             <button onclick="selectDate('15th February')">✨ 15th February</button>
@@ -87,18 +85,22 @@ function selectDate(date) {
     chosenDate = date;
     confettiBurst();
 
-    fade(`${date}?<br><br>Interesting choice.<br><br>Now tell me…`);
+    fade(`
+        ${date}?<br><br>
+        Interesting choice.<br><br>
+        What kind of “not-a-date” are we planning?
+    `);
 
-    setTimeout(showTypeOptions, 1600);
+    setTimeout(showTypeOptions, 1500);
 }
 
 function showTypeOptions() {
     text.innerHTML = `
-        What kind of day are we creating?
+        Choose the vibe:
         <div class="options">
             <button onclick="selectType('sunset')">🌇 Sunset… then dinner</button>
-            <button onclick="selectType('drive')">🚗 Long drive somewhere</button>
-            <button onclick="selectType('memory')">💫 Recreate a best day</button>
+            <button onclick="selectType('drive')">🚗 Drive somewhere (might take time)</button>
+            <button onclick="selectType('memory')">💫 Recreate one of our best days</button>
         </div>
     `;
 }
@@ -111,12 +113,17 @@ function selectType(type) {
     fade(`
         ${chosenDate}.<br><br>
         Perfect.<br><br>
-        I’ll handle the details.<br>
-        You just show up.
+        I’ll plan it properly.<br><br>
+        And we’ll just see what we end up calling it.
     `);
 
     setTimeout(() => {
-        fade(`<div class="final">See you soon… special friend.</div>`);
+        fade(`
+            <div class="final">
+            Save the date.<br><br>
+            (Not a date… unless it feels like one.)
+            </div>
+        `);
     }, 3500);
 }
 
@@ -140,25 +147,4 @@ function triggerScene(type) {
         let flash = document.createElement("div");
         flash.className = "flashback";
         sceneEffect.appendChild(flash);
-        setTimeout(() => flash.remove(), 3000);
-    }
-}
-
-function confettiBurst() {
-    for (let i = 0; i < 30; i++) {
-        let c = document.createElement("div");
-        c.className = "confetti";
-        c.style.left = Math.random() * 100 + "vw";
-        c.style.background = `hsl(${Math.random()*360}, 80%, 70%)`;
-        sceneEffect.appendChild(c);
-        setTimeout(() => c.remove(), 3000);
-    }
-}
-
-/* Hidden message */
-document.body.addEventListener("click", () => {
-    secretClicks++;
-    if (secretClicks === 6) {
-        alert("You were never just a 'special friend' to me.");
-    }
-});
+        setTi
