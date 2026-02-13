@@ -96,7 +96,7 @@ function selectDate(date) {
         Also, first stop is getting your eyes check, so you can appreciate the company.
     `);
 
-    setTimeout(showTypeOptions, 2000);
+    setTimeout(showTypeOptions, 5000);
 }
 
 function showTypeOptions() {
@@ -135,7 +135,7 @@ function selectType(type) {
             fade(`<div class="final">I’ll see you.</div>`);
         }, 2000);
 
-    }, 3500);
+    }, 5500);
 }
 
 function triggerScene(type) {
