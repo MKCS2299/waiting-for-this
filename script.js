@@ -8,6 +8,9 @@ const music = document.getElementById("music");
 const sceneEffect = document.getElementById("sceneEffect");
 const photo = document.getElementById("herPhoto");
 
+/* Attach click properly */
+btn.addEventListener("click", nextStep);
+
 /* Floating hearts */
 setInterval(() => {
     let heart = document.createElement("div");
@@ -39,7 +42,7 @@ function nextStep() {
 
     if (step === 1) {
         photo.style.display = "block";
-        fade(`It’s you.<br><br>Obviously.`);
+        fade("It’s you.<br><br>Obviously.");
         btn.innerText = "Wait… what?";
     }
 
@@ -81,7 +84,6 @@ function showDateOptions() {
 }
 
 function selectDate(date) {
-    vibrate();
     chosenDate = date;
     confettiBurst();
 
@@ -99,14 +101,13 @@ function showTypeOptions() {
         Choose the vibe:
         <div class="options">
             <button onclick="selectType('sunset')">🌇 Sunset… then dinner</button>
-            <button onclick="selectType('drive')">🚗 Drive somewhere (might take time)</button>
-            <button onclick="selectType('memory')">💫 Recreate one of our best days</button>
+            <button onclick="selectType('drive')">🚗 Drive somewhere</button>
+            <button onclick="selectType('memory')">💫 Recreate our best day</button>
         </div>
     `;
 }
 
 function selectType(type) {
-    vibrate();
     confettiBurst();
     triggerScene(type);
 
@@ -114,7 +115,7 @@ function selectType(type) {
         ${chosenDate}.<br><br>
         Perfect.<br><br>
         I’ll plan it properly.<br><br>
-        And we’ll just see what we end up calling it.
+        And we’ll see what we end up calling it.
     `);
 
     setTimeout(() => {
@@ -147,4 +148,17 @@ function triggerScene(type) {
         let flash = document.createElement("div");
         flash.className = "flashback";
         sceneEffect.appendChild(flash);
-        setTi
+        setTimeout(() => flash.remove(), 3000);
+    }
+}
+
+function confettiBurst() {
+    for (let i = 0; i < 20; i++) {
+        let c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.background = `hsl(${Math.random()*360}, 80%, 70%)`;
+        sceneEffect.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
+    }
+}
