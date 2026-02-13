@@ -4,7 +4,6 @@ let chosenDate = "";
 const text = document.getElementById("text");
 const btn = document.getElementById("btn");
 const music = document.getElementById("music");
-const voiceNote = document.getElementById("voiceNote");
 const sceneEffect = document.getElementById("sceneEffect");
 const photo = document.getElementById("herPhoto");
 
@@ -125,16 +124,17 @@ function selectType(type) {
     `);
 
     setTimeout(() => {
-        text.innerHTML = `
-            <div class="final">
+
+        fade(`
             Save the date.<br><br>
             (I meaaan)
-            </div>
+        `);
 
-            <button class="voice-btn" onclick="playVoice()">
-                Play something
-            </button>
-        `;
+        // 2 second tension pause
+        setTimeout(() => {
+            fade(`<div class="final">I’ll see you.</div>`);
+        }, 2000);
+
     }, 3500);
 }
 
@@ -171,24 +171,4 @@ function confettiBurst() {
         sceneEffect.appendChild(c);
         setTimeout(() => c.remove(), 3000);
     }
-}
-
-function playVoice() {
-
-    let fadeOut = setInterval(() => {
-        if (music.volume > 0.1) music.volume -= 0.05;
-        else clearInterval(fadeOut);
-    }, 100);
-
-    voiceNote.play();
-
-    voiceNote.onended = function() {
-
-        let fadeIn = setInterval(() => {
-            if (music.volume < 1) music.volume += 0.05;
-            else clearInterval(fadeIn);
-        }, 100);
-
-        fade(`<div class="final">I’ll see you.</div>`);
-    };
 }
