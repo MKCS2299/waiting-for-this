@@ -1,21 +1,26 @@
+/* ===== Base Layout ===== */
+
 body {
     margin: 0;
     font-family: Georgia, serif;
-    overflow: hidden;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, #ffdde1, #ee9ca7);
     color: #3b2f2f;
+    overflow-x: hidden;
 }
 
+/* ===== Background Glow ===== */
+
 .background {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at center, rgba(255,255,255,0.4), transparent);
     animation: pulse 6s ease-in-out infinite alternate;
+    z-index: 0;
 }
 
 @keyframes pulse {
@@ -23,77 +28,102 @@ body {
     to { opacity: 1; }
 }
 
+/* ===== Scene Layer ===== */
+
 .scene-effect {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     pointer-events: none;
     overflow: hidden;
+    z-index: 1;
 }
+
+/* ===== Container ===== */
 
 .container {
     position: relative;
     z-index: 2;
-    max-width: 680px;
-    padding: 50px;
-    background: rgba(255,255,255,0.9);
-    border-radius: 25px;
+    width: 90%;
+    max-width: 650px;
+    padding: 30px 20px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 20px;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
 }
 
+/* ===== Text ===== */
+
 h1 {
-    font-size: 26px;
+    font-size: 20px;
     line-height: 1.6;
     transition: opacity 0.5s ease;
 }
 
+/* Bigger text on larger screens */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 26px;
+    }
+}
+
+/* ===== Buttons ===== */
+
 button {
-    margin-top: 30px;
-    padding: 14px 28px;
-    border-radius: 30px;
+    margin-top: 20px;
+    padding: 12px 20px;
+    border-radius: 25px;
     border: none;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
     background: #ff7b7b;
     color: white;
     transition: 0.3s ease;
 }
 
-button:hover {
-    transform: scale(1.08);
+button:active {
+    transform: scale(0.96);
 }
 
 .options button {
     display: block;
     width: 100%;
-    margin: 15px 0;
+    margin: 12px 0;
 }
 
+/* ===== Final Text ===== */
+
 .final {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: bold;
 }
 
+/* ===== Photo ===== */
+
 .hidden-photo {
     display: none;
-    width: 220px;
-    border-radius: 20px;
+    width: 70%;
+    max-width: 220px;
+    border-radius: 18px;
     margin: 20px auto;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     animation: fadeInPhoto 1s ease forwards;
 }
 
 @keyframes fadeInPhoto {
-    from { opacity: 0; transform: scale(0.9); }
+    from { opacity: 0; transform: scale(0.95); }
     to { opacity: 1; transform: scale(1); }
 }
 
+/* ===== Floating Hearts ===== */
+
 .heart {
-    position: absolute;
+    position: fixed;
     color: rgba(255, 105, 180, 0.6);
-    font-size: 18px;
+    font-size: 16px;
     animation: floatUp 6s linear infinite;
+    z-index: 0;
 }
 
 @keyframes floatUp {
@@ -102,27 +132,29 @@ button:hover {
     100% { transform: translateY(-10vh); opacity: 0; }
 }
 
+/* ===== Scene Effects ===== */
+
 .sunset-sun {
     position: absolute;
     bottom: -150px;
     left: 50%;
     transform: translateX(-50%);
-    width: 180px;
-    height: 180px;
+    width: 140px;
+    height: 140px;
     background: radial-gradient(circle, #ffdd99, #ff9966);
     border-radius: 50%;
     animation: riseSun 4s forwards;
 }
 
 @keyframes riseSun {
-    to { bottom: 200px; }
+    to { bottom: 160px; }
 }
 
 .car {
     position: absolute;
-    bottom: 80px;
-    left: -200px;
-    font-size: 40px;
+    bottom: 60px;
+    left: -150px;
+    font-size: 30px;
     animation: drive 5s linear forwards;
 }
 
@@ -143,30 +175,17 @@ button:hover {
     100% { opacity: 0; }
 }
 
+/* ===== Confetti ===== */
+
 .confetti {
-    position: absolute;
+    position: fixed;
     width: 8px;
     height: 8px;
     animation: confettiFall 3s linear forwards;
+    z-index: 1;
 }
 
 @keyframes confettiFall {
-    0% { transform: translateY(-10vh) rotate(0deg); }
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
-
-.voice-btn {
-    margin-top: 30px;
-    padding: 14px 28px;
-    border-radius: 30px;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    background: #333;
-    color: white;
-    transition: 0.3s ease;
-}
-
-.voice-btn:hover {
-    transform: scale(1.08);
 }
