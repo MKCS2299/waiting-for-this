@@ -1,14 +1,13 @@
 let step = 0;
 let chosenDate = "";
-let secretClicks = 0;
 
 const text = document.getElementById("text");
 const btn = document.getElementById("btn");
 const music = document.getElementById("music");
+const voiceNote = document.getElementById("voiceNote");
 const sceneEffect = document.getElementById("sceneEffect");
 const photo = document.getElementById("herPhoto");
 
-/* Attach button safely */
 btn.addEventListener("click", nextStep);
 
 /* Floating hearts */
@@ -22,10 +21,6 @@ setInterval(() => {
     setTimeout(() => heart.remove(), 6000);
 }, 800);
 
-function vibrate() {
-    if (navigator.vibrate) navigator.vibrate(40);
-}
-
 function fade(content) {
     text.style.opacity = 0;
     setTimeout(() => {
@@ -36,15 +31,12 @@ function fade(content) {
 
 function nextStep() {
 
-    vibrate();
-
     if (step === 0) music.play();
-
     step++;
 
     if (step === 1) {
         photo.style.display = "block";
-        fade(`It’s you.<br><br>Obviously.`);
+        fade("It’s you.<br><br>Obviously.");
         btn.innerText = "Wait… what?";
     }
 
@@ -52,15 +44,15 @@ function nextStep() {
         fade(`
             I was thinking…<br><br>
             How can someone as cute as you,<br>
-            someone as ridiculously awesome as you,<br>
-            just stay inside?
+            someone who makes even silence feel warm,<br>
+            just stay inside on this day?
         `);
         btn.innerText = "Go on…";
     }
 
     else if (step === 3) {
         fade(`
-            As a special friend,<br><br>
+            As my favorite special friend,<br><br>
             it didn’t sit right with me.
         `);
         btn.innerText = "And?";
@@ -68,10 +60,9 @@ function nextStep() {
 
     else if (step === 4) {
         fade(`
-            So maybe…<br><br>
-            we save the date.<br><br>
-            Not calling it a date.<br>
-            Unless… you want to.
+            So maybe we save the date.<br><br>
+            Ohh, not calling this that date date!<br>
+            Unless… I meaaaaan.
         `);
         btn.innerText = "Hypothetically speaking?";
     }
@@ -81,8 +72,6 @@ function nextStep() {
     }
 }
 
-/* DATE OPTIONS */
-
 function showDateOptions() {
     text.innerHTML = `
         Hypothetically speaking 😌<br><br>
@@ -90,7 +79,7 @@ function showDateOptions() {
         <div class="options">
             <button onclick="selectDate('14th February')">🌹 14th February</button>
             <button onclick="selectDate('15th February')">✨ 15th February</button>
-            <button onclick="selectDate('Next Weekend')">🌅 Next Weekend</button>
+            <button onclick="selectDate('Next Weekend or next next weekend')">🌅 Next Weekend</button>
         </div>
     `;
     btn.style.display = "none";
@@ -102,30 +91,22 @@ function selectDate(date) {
 
     fade(`
         ${date}?<br><br>
-        Interesting choice.<br><br>
-        And what kind of “not-a-date” are we planning?
+        You remember me not meeting your eyes while driving you to Gurgaon station?<br>
+        The way I feel that day?<br><br>
+        Yeah… something like that.
+        Also, first stop is getting your eyes check, so you can appreciate the company.
     `);
 
-    setTimeout(showTypeOptions, 1500);
+    setTimeout(showTypeOptions, 2000);
 }
-
-/* TYPE OPTIONS */
 
 function showTypeOptions() {
     text.innerHTML = `
         Choose the vibe:
         <div class="options">
-            <button onclick="selectType('sunset')">
-                🌇 Sunset… and then dinner
-            </button>
-
-            <button onclick="selectType('drive')">
-                🚗 Drive somewhere (might take time)
-            </button>
-
-            <button onclick="selectType('memory')">
-                💫 Recreate one of our best days
-            </button>
+            <button onclick="selectType('sunset')">🌇 Sunset…then exploration and then dinner</button>
+            <button onclick="selectType('drive')">🚗 Drive and go see birds.</button>
+            <button onclick="selectType('memory')">💫 Recreate one of our best days (this requires getting up in the morning).</button>
         </div>
     `;
 }
@@ -137,23 +118,25 @@ function selectType(type) {
     fade(`
         ${chosenDate}.<br><br>
         That sounds like something<br>
-        two special friends would enjoy.<br><br>
+        two “special friends” would enjoy.<br><br>
         I’ll handle the planning.<br>
-        You just show up.
+        No pressure. No expectations.<br><br>
+        Just you and me.
     `);
 
     setTimeout(() => {
-        fade(`
+        text.innerHTML = `
             <div class="final">
             Save the date.<br><br>
-            (Not officially a date…<br>
-            unless it feels like one.)
+            (I meaaan)
             </div>
-        `);
+
+            <button class="voice-btn" onclick="playVoice()">
+                Play something
+            </button>
+        `;
     }, 3500);
 }
-
-/* SCENE EFFECTS */
 
 function triggerScene(type) {
     sceneEffect.innerHTML = "";
@@ -179,8 +162,6 @@ function triggerScene(type) {
     }
 }
 
-/* CONFETTI */
-
 function confettiBurst() {
     for (let i = 0; i < 25; i++) {
         let c = document.createElement("div");
@@ -192,11 +173,22 @@ function confettiBurst() {
     }
 }
 
-/* SECRET MESSAGE */
+function playVoice() {
 
-document.body.addEventListener("click", () => {
-    secretClicks++;
-    if (secretClicks === 7) {
-        alert("You know this was never just a 'special friend' plan, right?");
-    }
-});
+    let fadeOut = setInterval(() => {
+        if (music.volume > 0.1) music.volume -= 0.05;
+        else clearInterval(fadeOut);
+    }, 100);
+
+    voiceNote.play();
+
+    voiceNote.onended = function() {
+
+        let fadeIn = setInterval(() => {
+            if (music.volume < 1) music.volume += 0.05;
+            else clearInterval(fadeIn);
+        }, 100);
+
+        fade(`<div class="final">I’ll see you.</div>`);
+    };
+}
