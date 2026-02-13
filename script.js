@@ -8,7 +8,7 @@ const music = document.getElementById("music");
 const sceneEffect = document.getElementById("sceneEffect");
 const photo = document.getElementById("herPhoto");
 
-/* Attach click properly */
+/* Attach button safely */
 btn.addEventListener("click", nextStep);
 
 /* Floating hearts */
@@ -37,12 +37,14 @@ function fade(content) {
 function nextStep() {
 
     vibrate();
+
     if (step === 0) music.play();
+
     step++;
 
     if (step === 1) {
         photo.style.display = "block";
-        fade("It’s you.<br><br>Obviously.");
+        fade(`It’s you.<br><br>Obviously.`);
         btn.innerText = "Wait… what?";
     }
 
@@ -51,28 +53,39 @@ function nextStep() {
             I was thinking…<br><br>
             How can someone as cute as you,<br>
             someone as ridiculously awesome as you,<br>
-            stay inside on a day like that?
+            just stay inside?
         `);
         btn.innerText = "Go on…";
     }
 
     else if (step === 3) {
         fade(`
-            So maybe we save the date.<br><br>
-            Not calling it a date.<br>
-            Unless… you want to.
+            As a special friend,<br><br>
+            it didn’t sit right with me.
         `);
-        btn.innerText = "Oh really?";
+        btn.innerText = "And?";
     }
 
     else if (step === 4) {
+        fade(`
+            So maybe…<br><br>
+            we save the date.<br><br>
+            Not calling it a date.<br>
+            Unless… you want to.
+        `);
+        btn.innerText = "Hypothetically speaking?";
+    }
+
+    else if (step === 5) {
         showDateOptions();
     }
 }
 
+/* DATE OPTIONS */
+
 function showDateOptions() {
     text.innerHTML = `
-        So… hypothetically speaking 😌<br><br>
+        Hypothetically speaking 😌<br><br>
         When would you be free?
         <div class="options">
             <button onclick="selectDate('14th February')">🌹 14th February</button>
@@ -90,19 +103,29 @@ function selectDate(date) {
     fade(`
         ${date}?<br><br>
         Interesting choice.<br><br>
-        What kind of “not-a-date” are we planning?
+        And what kind of “not-a-date” are we planning?
     `);
 
     setTimeout(showTypeOptions, 1500);
 }
 
+/* TYPE OPTIONS */
+
 function showTypeOptions() {
     text.innerHTML = `
         Choose the vibe:
         <div class="options">
-            <button onclick="selectType('sunset')">🌇 Sunset… then dinner</button>
-            <button onclick="selectType('drive')">🚗 Drive somewhere</button>
-            <button onclick="selectType('memory')">💫 Recreate our best day</button>
+            <button onclick="selectType('sunset')">
+                🌇 Sunset… and then dinner
+            </button>
+
+            <button onclick="selectType('drive')">
+                🚗 Drive somewhere (might take time)
+            </button>
+
+            <button onclick="selectType('memory')">
+                💫 Recreate one of our best days
+            </button>
         </div>
     `;
 }
@@ -113,20 +136,24 @@ function selectType(type) {
 
     fade(`
         ${chosenDate}.<br><br>
-        Perfect.<br><br>
-        I’ll plan it properly.<br><br>
-        And we’ll see what we end up calling it.
+        That sounds like something<br>
+        two special friends would enjoy.<br><br>
+        I’ll handle the planning.<br>
+        You just show up.
     `);
 
     setTimeout(() => {
         fade(`
             <div class="final">
             Save the date.<br><br>
-            (Not a date… unless it feels like one.)
+            (Not officially a date…<br>
+            unless it feels like one.)
             </div>
         `);
     }, 3500);
 }
+
+/* SCENE EFFECTS */
 
 function triggerScene(type) {
     sceneEffect.innerHTML = "";
@@ -152,8 +179,10 @@ function triggerScene(type) {
     }
 }
 
+/* CONFETTI */
+
 function confettiBurst() {
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 25; i++) {
         let c = document.createElement("div");
         c.className = "confetti";
         c.style.left = Math.random() * 100 + "vw";
@@ -162,3 +191,12 @@ function confettiBurst() {
         setTimeout(() => c.remove(), 3000);
     }
 }
+
+/* SECRET MESSAGE */
+
+document.body.addEventListener("click", () => {
+    secretClicks++;
+    if (secretClicks === 7) {
+        alert("You know this was never just a 'special friend' plan, right?");
+    }
+});
