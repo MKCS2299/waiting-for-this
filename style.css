@@ -1,5 +1,3 @@
-/* ===== Base Layout ===== */
-
 body {
     margin: 0;
     font-family: Georgia, serif;
@@ -11,8 +9,6 @@ body {
     background: linear-gradient(135deg, #ffdde1, #ee9ca7);
     color: #3b2f2f;
 }
-
-/* ===== Background Glow ===== */
 
 .background {
     position: absolute;
@@ -27,8 +23,6 @@ body {
     to { opacity: 1; }
 }
 
-/* ===== Scene Effect Layer ===== */
-
 .scene-effect {
     position: absolute;
     width: 100%;
@@ -36,31 +30,6 @@ body {
     pointer-events: none;
     overflow: hidden;
 }
-
-/* ===== Floating Hearts ===== */
-
-.heart {
-    position: absolute;
-    color: rgba(255, 105, 180, 0.6);
-    font-size: 18px;
-    animation: floatUp 6s linear infinite;
-}
-
-@keyframes floatUp {
-    0% {
-        transform: translateY(100vh);
-        opacity: 0;
-    }
-    20% {
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-10vh);
-        opacity: 0;
-    }
-}
-
-/* ===== Main Container ===== */
 
 .container {
     position: relative;
@@ -73,15 +42,11 @@ body {
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
 
-/* ===== Text ===== */
-
 h1 {
     font-size: 26px;
     line-height: 1.6;
     transition: opacity 0.5s ease;
 }
-
-/* ===== Buttons ===== */
 
 button {
     margin-top: 30px;
@@ -105,14 +70,10 @@ button:hover {
     margin: 15px 0;
 }
 
-/* ===== Final Text ===== */
-
 .final {
     font-size: 28px;
     font-weight: bold;
 }
-
-/* ===== Photo Reveal ===== */
 
 .hidden-photo {
     display: none;
@@ -124,17 +85,22 @@ button:hover {
 }
 
 @keyframes fadeInPhoto {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
-/* ===== Sunset Animation ===== */
+.heart {
+    position: absolute;
+    color: rgba(255, 105, 180, 0.6);
+    font-size: 18px;
+    animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(100vh); opacity: 0; }
+    20% { opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
 
 .sunset-sun {
     position: absolute;
@@ -152,8 +118,6 @@ button:hover {
     to { bottom: 200px; }
 }
 
-/* ===== Car Animation ===== */
-
 .car {
     position: absolute;
     bottom: 80px;
@@ -165,8 +129,6 @@ button:hover {
 @keyframes drive {
     to { left: 110vw; }
 }
-
-/* ===== Flashback Glow ===== */
 
 .flashback {
     position: absolute;
@@ -181,8 +143,6 @@ button:hover {
     100% { opacity: 0; }
 }
 
-/* ===== Confetti ===== */
-
 .confetti {
     position: absolute;
     width: 8px;
@@ -191,12 +151,22 @@ button:hover {
 }
 
 @keyframes confettiFall {
-    0% {
-        transform: translateY(-10vh) rotate(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(110vh) rotate(360deg);
-        opacity: 0;
-    }
+    0% { transform: translateY(-10vh) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.voice-btn {
+    margin-top: 30px;
+    padding: 14px 28px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    background: #333;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.voice-btn:hover {
+    transform: scale(1.08);
 }
