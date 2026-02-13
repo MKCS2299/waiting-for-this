@@ -96,7 +96,7 @@ function selectDate(date) {
         Also, first stop is getting your eyes check, so you can appreciate the company.
     `);
 
-    setTimeout(showTypeOptions, 5000);
+    setTimeout(showTypeOptions, 7000);
 }
 
 function showTypeOptions() {
