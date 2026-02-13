@@ -51,7 +51,7 @@ function nextStep() {
 
     else if (step === 3) {
         fade(`
-            As my favorite special friend,<br><br>
+            As your favorite special friend,<br><br>
             it didn’t sit right with me.
         `);
         btn.innerText = "And?";
